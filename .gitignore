@@ -8,7 +8,7 @@ __pycache__/
 
 # the database itself
 dbproject.sqlite3
-project.db
+voorraad.db
 
 # configuration files
 settings.py
