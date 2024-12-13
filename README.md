@@ -9,7 +9,8 @@
 - [Gebruik](#gebruik)
 - [Bestandenstructuur](#bestandenstructuur)
 - [Afhankelijkheden](#afhankelijkheden)
-- [Toekomstige verbeteringen](#toekomstige-verbeteringen)
+- [Structuur van de Voorraad Database](#structuur-van-de-voorraad-database)
+
 
 ## Installatie
 
@@ -52,7 +53,7 @@ python ./db/create_testdb.py
 ```
 
 
-5.5 **Verbind je eigen Voorraad-database/de testdatabase (optioneel): Als je een eigen voorraad-database wilt gebruiken in plaats van de testdatabase, kun je de databaseverbinding configureren in het bestand settings.py in de config map.**
+6. **Verbind je eigen Voorraad-database/de testdatabase (optioneel): Als je een eigen voorraad-database wilt gebruiken in plaats van de testdatabase, kun je de databaseverbinding configureren in het bestand settings.py in de config map.**
 
 Maak een settings.py bestand aan in de config map en definieer de volgende variabelen:
 
@@ -67,30 +68,147 @@ Zorg ervoor dat je de juiste padnaam opgeeft voor je eigen databasebestand. Het 
 
 ## Gebruik
 
+
 Nadat de installatie goed gebeurd is: (test database voorraad.db aanwezig in de db folder, settings.py gedefinieerd)
 
 1. **Run de applicatie (current directory on cmd = yourPath/Voorraadbeheer)**
-   ```bash
-  python ./main.py
+
+   ```python
+   python ./main.py
    ```
+
 Na het starten van de applicatie kun je kiezen uit verschillende opties om de voorraad van drank- en snackproducten te beheren. Dit zijn de hoofdopties:
 
 2. **Je drukt het nummer/letter**
-  1 -> Toon de tabel Drinks - Weergave van alle drankproducten in de database.
-  2 -> Toon de tabel Snacks - Weergave van alle snackproducten in de database.
-  3 -> Exporteer Drinks naar CSV - Exporteer de drankproducten naar een CSV-bestand.
-  4 -> Exporteer Snacks naar CSV - Exporteer de snackproducten naar een CSV-bestand.
-  5 -> Exporteer Drinks naar Excel - Exporteer de drankproducten naar een Excel-bestand.
-  6 -> Exporteer Snacks naar Excel - Exporteer de snackproducten naar een Excel-bestand.
-  7 -> Voeg een nieuwe Drink toe - Voeg een nieuw drankproduct toe.
-  8 -> Voeg een nieuwe Snack toe - Voeg een nieuw snackproduct toe.
-  9 -> Wijzig een bestaande Drink - Wijzig gegevens van een bestaand drankproduct.
-  10 -> Wijzig een bestaande Snack - Wijzig gegevens van een bestaand snackproduct.
-  11 -> Verwijder een Drink - Verwijder een bestaand drankproduct.
-  12 -> Verwijder een Snack - Verwijder een bestaand snackproduct.
-  0 -> Afsluiten - Sluit de applicatie af.
-  q -> Om een actie te stoppen
+1 -> Toon de tabel Drinks - Weergave van alle drankproducten in de database.\
+2 -> Toon de tabel Snacks - Weergave van alle snackproducten in de database.\
+3 -> Exporteer Drinks naar CSV - Exporteer de drankproducten naar een CSV-bestand.\
+4 -> Exporteer Snacks naar CSV - Exporteer de snackproducten naar een CSV-bestand.\
+5 -> Exporteer Drinks naar Excel - Exporteer de drankproducten naar een Excel-bestand.\
+6 -> Exporteer Snacks naar Excel - Exporteer de snackproducten naar een Excel-bestand.\
+7 -> Voeg een nieuwe Drink toe - Voeg een nieuw drankproduct toe.\
+8 -> Voeg een nieuwe Snack toe - Voeg een nieuw snackproduct toe.\
+9 -> Wijzig een bestaande Drink - Wijzig gegevens van een bestaand drankproduct.\
+10 -> Wijzig een bestaande Snack - Wijzig gegevens van een bestaand snackproduct.\
+11 -> Verwijder een Drink - Verwijder een bestaand drankproduct.\
+12 -> Verwijder een Snack - Verwijder een bestaand snackproduct.\
+0 -> Afsluiten - Sluit de applicatie af.\
+q -> Om een actie te stoppen.\
 
+## Bestandenstructuur
+De projectstructuur is als volgt:
+
+```markdown
+
+C:.
+│   .gitignore
+│   main.py
+│   README.md
+│   requirements.txt
+│
+├───config
+│   │   settings.py
+│   │
+│   └───__pycache__
+│           settings.cpython-312.pyc
+│
+├───db
+│   │   create_test_db.py
+│   │   database_manager.py
+│   │   voorraad.db
+│   │
+│   └───__pycache__
+│           database_manager.cpython-312.pyc
+│
+├───models
+│   │   Drink.py
+│   │   Snack.py
+│   │   
+│   │
+│   └───__pycache__
+│           Drink.cpython-312.pyc
+│           Snack.cpython-312.pyc
+│
+└───ui
+    │   ui.py
+    │
+    └───__pycache__
+            ui.cpython-312.pyc
+```
+- config/: Bevat configuratie-instellingen zoals de databaseverbinding en wachtwoorden.
+
+- settings.py: Instellingen voor de database en andere globale variabelen.
+- db/: Bevat de databasebestanden (SQLite).
+
+- voorraad.db:
+  De SQLite-database waar de voorraad van drank- en snackproducten wordt opgeslagen.\
+  Het create_test_db.py script: Een Python-script om de testdatabase te initialiseren.\
+- models/: Bevat de modelklassen voor de drank- en snackobjecten.
+   drink.py: Bevat de klasse voor drankproducten, inclusief validatie en methoden.\
+   snack.py: Bevat de klasse voor snackproducten, inclusief validatie en methoden.\
+- ui/: Bevat de gebruikersinterface-methoden voor het tonen van tabellen, toevoegen, bewerken en verwijderen van producten.
+   ui.py: Bevat methoden zoals print_table, create_drink, create_snack, enzovoort.\
+
+## Afhankelijkheden
+1. **Het project heeft de volgende Python-pakketten nodig:**
+
+- sqlite3: Voor database-interacties.
+- pandas: Voor export naar CSV en Excel-bestanden.
+- openpyxl: Voor export naar Excel-bestanden.
+
+2. **Je hebt de afhankelijkheden geïnstalleerd via:**
+
+```bash
+pip install -r requirements.txt
+```
+
+## Structuur van de Voorraad Database
+
+Om de **Voorraadbeheer** applicatie correct te laten werken, moet de voorraad-database voldoen aan een specifieke structuur. De database bestaat uit twee hoofdtabellen: **Drinks** en **Snacks**. Elke tabel moet een aantal noodzakelijke velden bevatten, die hieronder worden beschreven.
+
+### 0. **Opmerkingen**
+- Het unique_id veld wordt in verschillende scripts gecontroleert op het formaat "XX-0000".
+- De expiration_date wordt in verschillende scripts gecontroleert op het formaat "DD-MM-YYYY".
+- Het veld unit_price in de database, komt overeen met de variabele unit_price_per_piece in de klasse Snack.
+
+### 1. **Drinks Tabel**
+De **Drinks** tabel bevat informatie over drankproducten. De velden in deze tabel moeten als volgt zijn:
+
+- **unique_id** (TEXT): Een unieke identificatie voor het drankproduct. Dit veld moet een string zijn in het formaat `XX-0001`, waarbij `XX` twee letters zijn en `0001` een viercijferig nummer.
+- **name** (TEXT): De naam van het drankproduct.
+- **unit_price_per_liter** (REAL): De prijs per liter van de drank (bijvoorbeeld 2.50 voor €2,50 per liter).
+- **quantity** (INTEGER): Het aantal eenheden van het drankproduct in de voorraad.
+- **expiration_date** (TEXT): De vervaldatum van het product, geformatteerd als `DD-MM-YYYY`.
+
+### 2. **Snacks Tabel**
+De **Snacks** tabel bevat informatie over snackproducten. De velden in deze tabel moeten als volgt zijn:
+
+- **unique_id** (TEXT): Een unieke identificatie voor het snackproduct. Dit veld moet een string zijn in het formaat `SN-0001`, waarbij `SN` de prefix is en `0001` een viercijferig nummer.
+- **name** (TEXT): De naam van het snackproduct.
+- **unit_price_per_piece** (REAL): De prijs per stuk van de snack (bijvoorbeeld 1.50 voor €1,50 per stuk).
+- **quantity** (INTEGER): Het aantal eenheden van het snackproduct in de voorraad.
+- **expiration_date** (TEXT): De vervaldatum van het product, geformatteerd als `DD-MM-YYYY`.
+
+### 3. **Voorbeeld Database Schema**
+Het onderstaande SQL-schema toont een voorbeeld van hoe de database eruit moet zien:
+
+```sql
+CREATE TABLE Drinks (
+    unique_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    unit_price_per_liter REAL NOT NULL,
+    quantity INTEGER NOT NULL,
+    expiration_date TEXT NOT NULL
+);
+
+CREATE TABLE Snacks (
+    unique_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    unit_price_per_piece REAL NOT NULL,
+    quantity INTEGER NOT NULL,
+    expiration_date TEXT NOT NULL
+);
+```
 
 
 [@SamBonte](https://github.com/SamBonte).
