@@ -13,6 +13,9 @@ voorraad.db
 # configuration files
 settings.py
 
+# To Do file
+To_Do.txt
+
 # Distribution / packaging
 .Python
 build/
