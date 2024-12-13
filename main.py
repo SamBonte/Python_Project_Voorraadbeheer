@@ -17,8 +17,11 @@ def main():
         print(f"4. Exporteer Snacks naar een CSV-bestand")
         print(f"5. Exporteer Drinks naar een Excel-bestand")
         print(f"6. Exporteer Snacks naar een Excel-bestand")
+        print(f"7. Voeg een nieuwe Drink toe")
+        print(f"8. Voeg een nieuwe Snack toe")
         print("0. Afsluiten")
-        
+        print("q. Om een actie te stoppen")
+
 
         choice = input("Uw keuze: ").strip()
 
@@ -42,6 +45,10 @@ def main():
         elif choice == '6':
             file_path = input("Geef het pad voor de Excel-export (bv. snacks.xlsx): ")
             ui.export_data_to_excel(f"{DATABASE_TABLE_SNACKS}", file_path)
+        elif choice == '7':
+            ui.create_drink()
+        elif choice == '8':
+            ui.create_snack()
         else:
             print("Ongeldige keuze. Probeer opnieuw.")
 
