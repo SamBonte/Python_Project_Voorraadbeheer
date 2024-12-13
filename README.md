@@ -93,7 +93,7 @@ Na het starten van de applicatie kun je kiezen uit verschillende opties om de vo
 11 -> Verwijder een Drink - Verwijder een bestaand drankproduct.\
 12 -> Verwijder een Snack - Verwijder een bestaand snackproduct.\
 0 -> Afsluiten - Sluit de applicatie af.\
-q -> Om een actie te stoppen.\
+q -> Om een actie te stoppen.
 
 ## Bestandenstructuur
 De projectstructuur is als volgt:
