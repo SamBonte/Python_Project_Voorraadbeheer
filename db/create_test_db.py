@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the database (this will create the .db file if it doesn't exist)
-conn = sqlite3.connect('voorraad.db')
+conn = sqlite3.connect('db/voorraad.db')
 cursor = conn.cursor()
 
 # Create Snacks table
