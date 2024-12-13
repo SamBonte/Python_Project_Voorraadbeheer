@@ -21,6 +21,8 @@ def main():
         print(f"8. Voeg een nieuwe Snack toe")
         print(f"9. Wijzig een bestaande Drink")
         print(f"10. Wijzig een bestaande Snack")
+        print(f"11. Verwijder een Drink")
+        print(f"12. Verwijder een Snack")
         print("0. Afsluiten")
         print("q. Om een actie te stoppen")
 
@@ -63,6 +65,10 @@ def main():
             ui.update_drink_ui()
         elif choice == '10':
             ui.update_snack_ui()
+        elif choice == '11':
+            ui.delete_drink_ui()  # Verwijder een drink
+        elif choice == '12':
+            ui.delete_snack_ui()  # Verwijder een snack
         else:
             print("Ongeldige keuze. Probeer opnieuw.")
 

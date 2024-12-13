@@ -16,6 +16,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../config'))
 from settings import DATABASE_NAME
 from settings import DATABASE_TABLE_SNACKS
 from settings import DATABASE_TABLE_DRINKS
+from settings import PASSWORD_ADMIN
 
 
 def connect_to_db():
@@ -213,5 +214,52 @@ def update_snack(snack):
         conn.commit()
     except sqlite3.Error as e:
         raise Exception(f"Error updating snack: {e}")
+    finally:
+        conn.close()
+
+# deletes dring from db
+def delete_drink_by_id(drink_id):
+    """Verwijdert een drink uit de database op basis van unique_id"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    
+    try:
+        password = input("Password admin to confirm: ");
+        if password == f"{PASSWORD_ADMIN}":
+            cursor.execute(f"DELETE FROM {DATABASE_TABLE_DRINKS} WHERE unique_id = ?", (drink_id,))
+            conn.commit()
+            if cursor.rowcount == 0:
+                raise Exception(f"Drink met ID '{drink_id}' niet gevonden.")
+            else:
+                print(f"Drink met ID '{drink_id}' succesvol verwijderd.")
+        else:
+            print(f"Access denied")
+        
+
+    except sqlite3.Error as e:
+        raise Exception(f"Fout bij het verwijderen van de snack: {e}")
+    finally:
+        conn.close()
+
+# deletes snack from db
+def delete_snack_by_id(snack_id):
+    """Verwijdert een snack uit de database op basis van unique_id"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    try:
+        password = input("Password admin to confirm: ");
+        if password == f"{PASSWORD_ADMIN}":
+            cursor.execute(f"DELETE FROM {DATABASE_TABLE_SNACKS} WHERE unique_id = ?", (snack_id,))
+            conn.commit()
+            if cursor.rowcount == 0:
+                raise Exception(f"Snack met ID '{snack_id}' niet gevonden.")
+            else:
+                print(f"Snack met ID '{snack_id}' succesvol verwijderd.")
+        else:
+            print(f"Access denied")
+        
+
+    except sqlite3.Error as e:
+        raise Exception(f"Fout bij het verwijderen van de snack: {e}")
     finally:
         conn.close()

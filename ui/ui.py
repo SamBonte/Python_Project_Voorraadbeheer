@@ -198,3 +198,25 @@ def update_snack_ui():
         print("Snack succesvol bijgewerkt.")
     except Exception as e:
         print(f"Fout bij het bijwerken van de snack: {e}")
+
+def delete_drink_ui():
+    """UI-functie om een drink te verwijderen"""
+    drink_id = input("Geef het ID van de drink die je wilt verwijderen: ").strip()
+    if q_cancel(drink_id):
+        return
+
+    try:
+        db.delete_drink_by_id(drink_id)
+    except Exception as e:
+        print(f"Fout bij het verwijderen van de drink: {e}")
+
+def delete_snack_ui():
+    """UI-functie om een snack te verwijderen"""
+    snack_id = input("Geef het ID van de snack die je wilt verwijderen: ").strip()
+    if q_cancel(snack_id):
+        return
+
+    try:
+        db.delete_snack_by_id(snack_id)
+    except Exception as e:
+        print(f"Fout bij het verwijderen van de snack: {e}")
