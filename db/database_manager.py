@@ -121,7 +121,7 @@ def add_drink(drink):
     cursor = conn.cursor()
     try:
         
-        if id_exists("Drinks", drink.get_unique_id()):  # Hier gebruik je get_unique_id
+        if id_exists("Drinks", drink.get_unique_id()):
             raise Exception(f"Drink met ID '{drink.get_unique_id()}' bestaat al. Eerstvolgende geldige ID: {get_next_id('Drinks')}")
         
         cursor.execute(
@@ -141,7 +141,7 @@ def add_snack(snack):
     cursor = conn.cursor()
     try:
         # Controleer of de Snack al bestaat op basis van unique_id
-        if id_exists("Snacks", snack.get_unique_id()):  # Gebruik get_unique_id voor de controle
+        if id_exists("Snacks", snack.get_unique_id()): 
             raise Exception(f"Snack met ID '{snack.get_unique_id()}' bestaat al. Eerstvolgende geldige ID: {get_next_id('Snacks')}")
         
         cursor.execute(
@@ -151,5 +151,67 @@ def add_snack(snack):
         conn.commit()
     except sqlite3.Error as e:
         raise Exception(f"Error inserting snack: {e}")
+    finally:
+        conn.close()
+
+# gets drink from db
+def get_drink_by_id(drink_id):
+    """Haalt een drink op uit de database op basis van unique_id"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {DATABASE_TABLE_DRINKS} WHERE unique_id = ?", (drink_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    if row:
+        # Retourneer een Drink object
+        return Drink(row[0], row[1], row[2], row[3], row[4])  # row[0] = unique_id, row[1] = name, etc.
+    else:
+        raise Exception(f"Drink met ID '{drink_id}' niet gevonden.")
+
+# gets snack from db
+def get_snack_by_id(snack_id):
+    """Haalt een snack op uit de database op basis van unique_id"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {DATABASE_TABLE_SNACKS} WHERE unique_id = ?", (snack_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    if row:
+        # Retourneer een Snack object
+        return Snack(row[0], row[1], row[2], row[3], row[4])  # row[0] = unique_id, row[1] = name, etc.
+    else:
+        raise Exception(f"Snack met ID '{snack_id}' niet gevonden.")
+
+# update/modifies drink
+def update_drink(drink):
+    """Werk de drinkgegevens bij in de database"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "UPDATE Drinks SET name = ?, unit_price_per_liter = ?, quantity = ?, expiration_date = ? WHERE unique_id = ?",
+            (drink.get_name(), drink.get_unit_price_per_liter(), drink.get_quantity(), drink.get_expiration_date(), drink.get_unique_id())
+        )
+        conn.commit()
+    except sqlite3.Error as e:
+        raise Exception(f"Error updating drink: {e}")
+    finally:
+        conn.close()
+
+# updates/modifies snack
+def update_snack(snack):
+    """Werk de snackgegevens bij in de database"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "UPDATE Snacks SET name = ?, unit_price = ?, quantity = ?, expiration_date = ? WHERE unique_id = ?",
+            (snack.get_name(), snack.get_unit_price_per_piece(), snack.get_quantity(), snack.get_expiration_date(), snack.get_unique_id())
+        )
+        conn.commit()
+    except sqlite3.Error as e:
+        raise Exception(f"Error updating snack: {e}")
     finally:
         conn.close()

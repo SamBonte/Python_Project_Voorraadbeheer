@@ -19,6 +19,8 @@ def main():
         print(f"6. Exporteer Snacks naar een Excel-bestand")
         print(f"7. Voeg een nieuwe Drink toe")
         print(f"8. Voeg een nieuwe Snack toe")
+        print(f"9. Wijzig een bestaande Drink")
+        print(f"10. Wijzig een bestaande Snack")
         print("0. Afsluiten")
         print("q. Om een actie te stoppen")
 
@@ -35,20 +37,32 @@ def main():
             ui.print_table(f"{DATABASE_TABLE_SNACKS}")
         elif choice == '3':
             file_path = input("Geef het pad voor de CSV-export (bv. drinks.csv): ")
+            if ui.q_cancel(file_path):
+                return main()
             ui.export_data_to_csv(f"{DATABASE_TABLE_DRINKS}", file_path)
         elif choice == '4':
             file_path = input("Geef het pad voor de CSV-export (bv. snacks.csv): ")
+            if ui.q_cancel(file_path):
+                return main()
             ui.export_data_to_csv(f"{DATABASE_TABLE_SNACKS}", file_path)
         elif choice == '5':
             file_path = input("Geef het pad voor de Excel-export (bv. drinks.xlsx): ")
+            if ui.q_cancel(file_path):
+                return main()
             ui.export_data_to_excel(f"{DATABASE_TABLE_DRINKS}", file_path)
         elif choice == '6':
             file_path = input("Geef het pad voor de Excel-export (bv. snacks.xlsx): ")
+            if ui.q_cancel(file_path):
+                return main()
             ui.export_data_to_excel(f"{DATABASE_TABLE_SNACKS}", file_path)
         elif choice == '7':
             ui.create_drink()
         elif choice == '8':
             ui.create_snack()
+        elif choice == '9':
+            ui.update_drink_ui()
+        elif choice == '10':
+            ui.update_snack_ui()
         else:
             print("Ongeldige keuze. Probeer opnieuw.")
 

@@ -125,3 +125,76 @@ def q_cancel(user_input):
     if user_input == "q":
         return True
     return False
+
+def update_drink_ui():
+    """Laat de gebruiker een bestaande drink bijwerken"""
+    try:
+        # Haal de drink op uit de database
+        drink_id = input("Geef het ID van de drink die je wilt aanpassen: ")
+        if q_cancel(drink_id):
+            return
+
+        drink = db.get_drink_by_id(drink_id)
+        print(f"Je hebt de volgende drink geselecteerd:\n{drink}")
+
+        # Vraag om nieuwe waarden voor de drink
+        name = input(f"Nieuwe naam (huidige: {drink.get_name()}): ") or drink.get_name()
+        if q_cancel(name):
+            return
+
+        unit_price = input(f"Nieuwe prijs per liter (huidige: {drink.get_unit_price_per_liter()}): ") or drink.get_unit_price_per_liter()
+        if q_cancel(unit_price):
+            return
+        unit_price = float(unit_price)
+
+        quantity = input(f"Nieuw aantal (huidige: {drink.get_quantity()}): ") or drink.get_quantity()
+        if q_cancel(quantity):
+            return
+        quantity = int(quantity)
+
+        # Werk de drink bij
+        drink.set_name(name)
+        drink.set_unit_price_per_liter(unit_price)
+        drink.set_quantity(quantity)
+        # Update in de database
+        db.update_drink(drink)
+        print("Drink succesvol bijgewerkt.")
+    except Exception as e:
+        print(f"Fout bij het bijwerken van de drink: {e}")
+
+def update_snack_ui():
+    """Laat de gebruiker een bestaande snack bijwerken"""
+    snack_id = input("Geef het ID van de snack die je wilt aanpassen: ")
+    if q_cancel(snack_id):
+        return
+
+    try:
+        # Haal de snack op uit de database
+        snack = db.get_snack_by_id(snack_id)
+        print(f"Je hebt de volgende snack geselecteerd:\n{snack}")
+
+        # Vraag om nieuwe waarden voor de snack
+        name = input(f"Nieuwe naam (huidige: {snack.get_name()}): ") or snack.get_name()
+        if q_cancel(name):
+            return
+
+        unit_price = input(f"Nieuwe prijs per eenheid (huidige: {snack.get_unit_price_per_piece()}): ") or snack.get_unit_price_per_piece()
+        if q_cancel(unit_price):
+            return
+        unit_price = float(unit_price)
+
+        quantity = input(f"Nieuw aantal (huidige: {snack.get_quantity()}): ") or snack.get_quantity()
+        if q_cancel(quantity):
+            return
+        quantity = int(quantity)
+
+        # Werk de snack bij
+        snack.set_name(name)
+        snack.set_unit_price_per_piece(unit_price)
+        snack.set_quantity(quantity)
+
+        # Update in de database
+        db.update_snack(snack)
+        print("Snack succesvol bijgewerkt.")
+    except Exception as e:
+        print(f"Fout bij het bijwerken van de snack: {e}")
