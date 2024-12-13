@@ -6,6 +6,9 @@ import sqlite3
 from models.Drink import Drink
 from models.Snack import Snack
 
+import csv
+from openpyxl import Workbook # Moet in requirements.txt komen
+
 # Voeg de map 'config' toe aan sys.path, zodat Python 'settings.py' kan vinden
 sys.path.append(os.path.join(os.path.dirname(__file__), '../config'))
 
@@ -40,6 +43,37 @@ def get_snacks():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+def export_to_csv(table_name, file_path):
+    """Exporteert een tabel (Drinks of Snacks) naar een CSV-bestand"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {table_name}")
+    rows = cursor.fetchall()
+    headers = [description[0] for description in cursor.description]
+    conn.close()
+
+    import csv
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(headers)
+        writer.writerows(rows)
+
+def export_to_excel(table_name, file_path):
+    """Exporteert een tabel (Drinks of Snacks) naar een Excel-bestand"""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM {table_name}")
+    rows = cursor.fetchall()
+    headers = [description[0] for description in cursor.description]
+    conn.close()
+
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.append(headers)
+    for row in rows:
+        sheet.append(row)
+    workbook.save(file_path)
 
 
 

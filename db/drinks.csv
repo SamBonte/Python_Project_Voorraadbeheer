@@ -1,0 +1,21 @@
+unique_id,name,unit_price_per_liter,quantity,expiration_date
+AB-0001,Milk,2.3,20,12-12-2024
+AB-0002,Orange Juice,3.2,15,01-01-2025
+AB-0003,Apple Juice,3.1,18,10-02-2025
+AB-0004,Sparkling Water,1.5,25,05-03-2024
+AB-0005,Soda,1.2,50,20-06-2024
+AB-0006,Iced Tea,1.8,30,15-07-2024
+AB-0007,Lemonade,2.0,22,22-08-2024
+AB-0008,Energy Drink,2.5,18,30-09-2024
+AB-0009,Smoothie,3.0,10,12-10-2024
+AB-0010,Coffee,2.7,40,17-11-2024
+AB-0011,Tea,2.4,35,23-12-2024
+AB-0012,Hot Chocolate,2.9,25,09-01-2025
+AB-0013,Protein Shake,3.5,15,31-01-2025
+AB-0014,Almond Milk,2.8,20,13-02-2025
+AB-0015,Soy Milk,2.6,25,26-03-2024
+AB-0016,Coconut Water,2.5,18,19-04-2025
+AB-0017,Vegetable Juice,3.3,12,25-05-2024
+AB-0018,Cranberry Juice,3.2,20,12-06-2024
+AB-0019,Grape Juice,3.1,16,18-07-2024
+AB-0020,Mineral Water,1.8,30,28-08-2024
