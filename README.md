@@ -53,7 +53,8 @@ python ./db/create_testdb.py
 ```
 
 
-6. **Verbind je eigen Voorraad-database/de testdatabase (optioneel): Als je een eigen voorraad-database wilt gebruiken in plaats van de testdatabase, kun je de databaseverbinding configureren in het bestand settings.py in de config map.**
+6. **Verbind je eigen Voorraad-database/de testdatabase (optioneel):**\
+   (Als je een eigen voorraad-database wilt gebruiken in plaats van de testdatabase, kun je de databaseverbinding configureren in het bestand settings.py in de config map.)
 
 Maak een settings.py bestand aan in de config map en definieer de volgende variabelen:
 
