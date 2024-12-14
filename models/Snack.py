@@ -92,7 +92,7 @@ class Snack:
     @staticmethod
     def _validate_unique_id(unique_id):
         """Controleert het formaat van unique_id"""
-        return bool(re.fullmatch(r"SN-\d{4}", unique_id))
+        return bool(re.fullmatch(r"[A-Z]{2}-\d{4}", unique_id))
 
     @staticmethod
     def _validate_date(date_string):

@@ -146,7 +146,7 @@ def add_snack(snack):
             raise Exception(f"Snack met ID '{snack.get_unique_id()}' bestaat al. Eerstvolgende geldige ID: {get_next_id('Snacks')}")
         
         cursor.execute(
-            "INSERT INTO Snacks (unique_id, name, unit_price_per_piece, quantity, expiration_date) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO Snacks (unique_id, name, unit_price, quantity, expiration_date) VALUES (?, ?, ?, ?, ?)",
             (snack.get_unique_id(), snack.get_name(), snack.get_unit_price_per_piece(), snack.get_quantity(), snack.get_expiration_date()),
         )
         conn.commit()

@@ -16,6 +16,17 @@ settings.py
 # To Do file
 To_Do.txt
 
+# Test files
+test_drink.py
+test_snack.py
+test_database_manager.py
+test_ui.py
+test_main.py
+
+# .csv/.xlsx bestanden
+*.csv
+*.xlsx
+
 # Distribution / packaging
 .Python
 build/
