@@ -119,7 +119,24 @@ Na het starten van de applicatie kun je kiezen uit verschillende opties om de vo
    q -> Om een actie te stoppen.
    
 **OPM: Bij het verwijderen wordt een wachtwoord gevraagt, deze stelde je in op
-       *admin* of *je zelf gekozen passwoord* in de settings.py file.** 
+       *admin* of *je zelf gekozen passwoord* in de settings.py file.**
+       
+Default paswoord:
+```bash
+C:/YourPath/Python_Project_Voorraadbeheer>Password admin to confirm: admin
+```
+
+**OPM: Bij het exporteren naar CSV/Excel wordt een pad gevraagt, deze kan in de folder zelf of op een zelfgekozen locatie:**
+
+In de folder zelf:
+```bash
+C:/YourPath/Python_Project_Voorraadbeheer>Geef een pad op (bv. drinks.csv): ./drinks.csv
+```
+
+In een zelfgekozen pad "p":
+```bash
+C:/YourPath/Python_Project_Voorraadbeheer>Geef een pad op (bv. drinks.xlsx): p/drinks.csv
+```
 
 ## Bestandenstructuur
 De projectstructuur is als volgt:
