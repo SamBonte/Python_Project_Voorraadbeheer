@@ -32,6 +32,12 @@ Voor macOS/Linux:
 source .venv/bin/activate
 ```
 
+**OPM: Als u zich uit de .venv omgeving wilt begeven typ dan het volgende commando:**
+
+```bash
+deactivate
+```
+
 3. **Clone het project in de virtuele omgeving: Clone nu het project naar je lokale machine:**
 
 ```bash
@@ -41,22 +47,23 @@ git clone https://github.com/SamBonte/Python_Project_Voorraadbeheer.git
 4. **Installeer de vereiste afhankelijkheden: Ga naar de projectmap en installeer de benodigde pakketten:**
 
 ```bash
-cd Voorraadbeheer
+cd Python_Project_Voorraadbeheer
 pip install -r requirements.txt
 ```
 
-
-5. **Initialiseer de testdatabase: Om de applicatie te kunnen gebruiken, moet je eerst de testdatabase aanmaken. Dit kan door het volgende script uit te voeren:**
-
-```bash
-python ./db/create_testdb.py
-```
-
-
-6. **Verbind je eigen Voorraad-database/de testdatabase (optioneel):**\
+5. **Verbind je eigen Voorraad-database/de testdatabase (optioneel):**\
    (Als je een eigen voorraad-database wilt gebruiken in plaats van de testdatabase, kun je de databaseverbinding configureren in het bestand settings.py in de config map.)
 
-Maak een settings.py bestand aan in de config map en definieer de volgende variabelen:
+Maak een settings.py bestand aan in de config map:
+```python
+python -c "open('config/settings.py', 'w').close()"
+```
+
+- Open verkenner en navigeer naar de Project_Voorraadbeheer folder.
+- Navigeer naar de config folder.
+- Rechts klik op de settings.py.
+- Kies voor de optie *Bewerken in Notepad*
+- Kopiëer de volgende variabelen in de setttings.py file:
 
 ```python
 DATABASE_NAME = "pad/naar/jouw/database.db" of "db/voorraad.db"
@@ -64,8 +71,22 @@ DATABASE_TABLE_SNACKS = "Snacks"
 DATABASE_TABLE_DRINKS = "Drinks"
 PASSWORD_ADMIN = "admin"  # Pas dit aan indien gewenst
 ```
+- Vergeet niet de wijzigingen in de settings.py file te saven.\
 
 Zorg ervoor dat je de juiste padnaam opgeeft voor je eigen databasebestand. Het standaardpad voor de testdatabase is db/voorraad.db.
+
+6. **Initialiseer de testdatabase:**
+
+In de terminal ben je nog steeds in de Python_Project_Voorraadbeheer folder
+```bash
+C:\YourPath\Python_Project_Voorraadbeheer>
+```
+
+Om de applicatie te kunnen gebruiken, moet je eerst de testdatabase aanmaken. Dit kan door het volgende script uit te voeren:
+
+```bash
+python ./db/create_test_db.py
+```
 
 ## Gebruik
 
@@ -80,21 +101,25 @@ Nadat de installatie goed gebeurd is: (test database voorraad.db aanwezig in de 
 
 Na het starten van de applicatie kun je kiezen uit verschillende opties om de voorraad van drank- en snackproducten te beheren. Dit zijn de hoofdopties:
 
-2. **Je drukt het nummer/letter**
-1 -> Toon de tabel Drinks - Weergave van alle drankproducten in de database.\
-2 -> Toon de tabel Snacks - Weergave van alle snackproducten in de database.\
-3 -> Exporteer Drinks naar CSV - Exporteer de drankproducten naar een CSV-bestand.\
-4 -> Exporteer Snacks naar CSV - Exporteer de snackproducten naar een CSV-bestand.\
-5 -> Exporteer Drinks naar Excel - Exporteer de drankproducten naar een Excel-bestand.\
-6 -> Exporteer Snacks naar Excel - Exporteer de snackproducten naar een Excel-bestand.\
-7 -> Voeg een nieuwe Drink toe - Voeg een nieuw drankproduct toe.\
-8 -> Voeg een nieuwe Snack toe - Voeg een nieuw snackproduct toe.\
-9 -> Wijzig een bestaande Drink - Wijzig gegevens van een bestaand drankproduct.\
-10 -> Wijzig een bestaande Snack - Wijzig gegevens van een bestaand snackproduct.\
-11 -> Verwijder een Drink - Verwijder een bestaand drankproduct.\
-12 -> Verwijder een Snack - Verwijder een bestaand snackproduct.\
-0 -> Afsluiten - Sluit de applicatie af.\
-q -> Om een actie te stoppen.
+2. **Je drukt het nummer/letter:**
+   
+   1 -> Toon de tabel Drinks - Weergave van alle drankproducten in de database.\
+   2 -> Toon de tabel Snacks - Weergave van alle snackproducten in de database.\
+   3 -> Exporteer Drinks naar CSV - Exporteer de drankproducten naar een CSV-bestand.\
+   4 -> Exporteer Snacks naar CSV - Exporteer de snackproducten naar een CSV-bestand.\
+   5 -> Exporteer Drinks naar Excel - Exporteer de drankproducten naar een Excel-bestand.\
+   6 -> Exporteer Snacks naar Excel - Exporteer de snackproducten naar een Excel-bestand.\
+   7 -> Voeg een nieuwe Drink toe - Voeg een nieuw drankproduct toe.\
+   8 -> Voeg een nieuwe Snack toe - Voeg een nieuw snackproduct toe.\
+   9 -> Wijzig een bestaande Drink - Wijzig gegevens van een bestaand drankproduct.\
+   10 -> Wijzig een bestaande Snack - Wijzig gegevens van een bestaand snackproduct.\
+   11 -> Verwijder een Drink - Verwijder een bestaand drankproduct.\
+   12 -> Verwijder een Snack - Verwijder een bestaand snackproduct.\
+   0 -> Afsluiten - Sluit de applicatie af.\
+   q -> Om een actie te stoppen.
+   
+**OPM: Bij het verwijderen wordt een wachtwoord gevraagt, deze stelde je in op
+       *admin* of *je zelf gekozen passwoord* in de settings.py file.** 
 
 ## Bestandenstructuur
 De projectstructuur is als volgt:
@@ -137,18 +162,21 @@ C:.
             ui.cpython-312.pyc
 ```
 - config/: Bevat configuratie-instellingen zoals de databaseverbinding en wachtwoorden.
+  - settings.py: Instellingen voor de database en andere globale variabelen.
 
-- settings.py: Instellingen voor de database en andere globale variabelen.
 - db/: Bevat de databasebestanden (SQLite).
 
-- voorraad.db:
-  De SQLite-database waar de voorraad van drank- en snackproducten wordt opgeslagen.\
-  Het create_test_db.py script: Een Python-script om de testdatabase te initialiseren.\
+  - voorraad.db: De SQLite-database waar de voorraad van drank- en snackproducten wordt opgeslagen.
+  - Het create_test_db.py script: Een Python-script om de testdatabase te initialiseren.
+
 - models/: Bevat de modelklassen voor de drank- en snackobjecten.
-   drink.py: Bevat de klasse voor drankproducten, inclusief validatie en methoden.\
-   snack.py: Bevat de klasse voor snackproducten, inclusief validatie en methoden.\
+  
+   - drink.py: Bevat de klasse voor drankproducten, inclusief validatie en methoden.
+   - snack.py: Bevat de klasse voor snackproducten, inclusief validatie en methoden.
+
 - ui/: Bevat de gebruikersinterface-methoden voor het tonen van tabellen, toevoegen, bewerken en verwijderen van producten.
-   ui.py: Bevat methoden zoals print_table, create_drink, create_snack, enzovoort.\
+  
+   - ui.py: Bevat methoden zoals print_table, create_drink, create_snack, enzovoort.
 
 ## Afhankelijkheden
 1. **Het project heeft de volgende Python-pakketten nodig:**
@@ -171,6 +199,7 @@ Om de **Voorraadbeheer** applicatie correct te laten werken, moet de voorraad-da
 - Het unique_id veld wordt in verschillende scripts gecontroleert op het formaat "XX-0000".
 - De expiration_date wordt in verschillende scripts gecontroleert op het formaat "DD-MM-YYYY".
 - Het veld unit_price in de database, komt overeen met de variabele unit_price_per_piece in de klasse Snack.
+- Het veld unit_price in de database, komt overeen met de variabele unit_price_per_liter in de klasse Drink.
 
 ### 1. **Drinks Tabel**
 De **Drinks** tabel bevat informatie over drankproducten. De velden in deze tabel moeten als volgt zijn:
@@ -184,14 +213,14 @@ De **Drinks** tabel bevat informatie over drankproducten. De velden in deze tabe
 ### 2. **Snacks Tabel**
 De **Snacks** tabel bevat informatie over snackproducten. De velden in deze tabel moeten als volgt zijn:
 
-- **unique_id** (TEXT): Een unieke identificatie voor het snackproduct. Dit veld moet een string zijn in het formaat `SN-0001`, waarbij `SN` de prefix is en `0001` een viercijferig nummer.
+- **unique_id** (TEXT): Een unieke identificatie voor het snackproduct. Dit veld moet een string zijn in het formaat `XX-0001`, waarbij `XX` twee letters zijn en `0001` een viercijferig nummer.
 - **name** (TEXT): De naam van het snackproduct.
 - **unit_price_per_piece** (REAL): De prijs per stuk van de snack (bijvoorbeeld 1.50 voor €1,50 per stuk).
 - **quantity** (INTEGER): Het aantal eenheden van het snackproduct in de voorraad.
 - **expiration_date** (TEXT): De vervaldatum van het product, geformatteerd als `DD-MM-YYYY`.
 
 ### 3. **Voorbeeld Database Schema**
-Het onderstaande SQL-schema toont een voorbeeld van hoe de database eruit moet zien:
+Het onderstaande SQL-schema toont een voorbeeld van hoe een werkende Voorraad database eruit moet zien:
 
 ```sql
 CREATE TABLE Drinks (
